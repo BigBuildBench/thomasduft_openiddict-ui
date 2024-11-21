@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\Common.props" />
+
+  <PropertyGroup>
+    <AssemblyName>tomware.OpenIddict.UI.Identity.Infrastructure</AssemblyName>
+    <RootNamespace>tomware.OpenIddict.UI.Identity.Infrastructure</RootNamespace>
+    <Description>Infrastructure types for openiddict UI Identity</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE.md" Pack="true" PackagePath="" />
+    <None Include="..\..\..\icon.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+</Project>

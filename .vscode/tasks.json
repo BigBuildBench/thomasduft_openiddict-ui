@@ -1,0 +1,95 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build-server",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/samples/Server/Server.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build-api",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/samples/Api/Api.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build:test-watch",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "watch",
+        "test",
+        "--project",
+        "${workspaceFolder}/tests/OpenIddict.UI.Tests.csproj",
+        "/p:CollectCoverage=true",
+        "/p:CoverletOutputFormat=lcov",
+        "/p:CoverletOutput=./../lcov",
+        "/p:Include=[tomware.*]tomware.OpenIddict.UI.*",
+      ],
+      "problemMatcher": "$msCompile",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "dev:be-watch",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "watch",
+        "run",
+        "--project",
+        "${workspaceRoot}/samples/Server/Server.csproj",
+        "--environment",
+        "Development",
+        "--urls",
+        "https://localhost:5001"
+      ],
+      "problemMatcher": "$msCompile",
+      "options": {
+        "cwd": "${workspaceFolder}/samples/Server/"
+      }
+    },
+    {
+      "label": "dev:fe-start",
+      "type": "npm",
+      "script": "start",
+      "problemMatcher": [],
+      "options": {
+        "cwd": "${workspaceFolder}/samples/Client/"
+      }
+    },
+    // Compound tasks
+    {
+      "label": "dev:be-fe 🚀",
+      "icon": {
+        "id": "play",
+        "color": "terminal.ansiGreen"
+      },
+      "dependsOrder": "parallel",
+      "dependsOn": [
+        "dev:be-watch",
+        "dev:fe-start"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
